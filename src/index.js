@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {Component} from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 // import App from './App';
@@ -28,6 +28,7 @@ const root = ReactDOM.createRoot(document.getElementById('root'));
 function Comment(props) {
   return (
     <div className="Comment">
+      <Clock/>
       <UserInfo user={props.author}/>
       <div className="Comment-text">
         {props.text}
@@ -65,9 +66,41 @@ const comment = {
     name: 'denis'
   },
   text : 'qweqweqwewqe',
-  data : new Date().toLocaleDateString()
+  date : new Date().toLocaleTimeString()
 };
 
+class Clock extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {date : new Date()};
+  }
+
+  componentDidMount(){
+    this.timerID = setInterval(
+      () => this.tick(), 1000);
+  }
+
+  componentWillUnmount() {
+    clearInterval(this.timerID);
+  }
+
+  tick() {
+    this.setState({
+      date: new Date()
+    });
+  }
+
+  render(){
+    return (
+      <div>
+          <h3>{this.state.date.toLocaleTimeString()}</h3>
+      </div>
+    );
+  };
+}
 
 
-root.render(<Comment author={comment.author} text={comment.text} date={comment.data} />);
+
+root.render(
+  <Comment author={comment.author} text={comment.text} date={comment.date} />
+  );
