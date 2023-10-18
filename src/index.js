@@ -6,21 +6,18 @@ import './index.css';
 // const elem = <h2>Hello world!</h2>; 
 // const elem = React.createElement('h2', {className: 'greetings'}, 'Hello world!');
 
-const text = 'Hello world';
-
-const elem = (
-  <div>
-    <h2>{text}</h2>
-    <input type="text"></input>
-    <ol>
-      <li>123</li>
-      <li>321</li>
-    </ol>
-  </div>
-);
-
 const root = ReactDOM.createRoot(document.getElementById('root'));
-root.render(
- elem,
-);
+
+function tick() {
+  const elem = (
+    <div>
+      <h1>Hellow world!</h1>
+      <h2>{new Date().toLocaleTimeString()}</h2>
+    </div>
+  );
+  root.render(elem);
+}
+
+
+setInterval(tick, 1000);
 
