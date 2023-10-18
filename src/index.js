@@ -8,16 +8,66 @@ import './index.css';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
-function tick() {
-  const elem = (
-    <div>
-      <h1>Hellow world!</h1>
-      <h2>{new Date().toLocaleTimeString()}</h2>
+// class Welcome extends React.Component {
+//   render(){
+//     return <h2>Hello, {this.props.name}</h2>;
+//   }
+//   // <Welcome name="vasya" surname="qwert"/>
+// }
+
+
+// function SomeTest(prop) {
+//     return (
+//       <div>
+//         <h1>Your name is {prop.name}</h1>
+//         <h2>Your surname is {prop.surname} Isn't it?</h2>
+//       </div>      
+//     );
+// }
+
+function Comment(props) {
+  return (
+    <div className="Comment">
+      <UserInfo user={props.author}/>
+      <div className="Comment-text">
+        {props.text}
+      </div>
+      <div className="Comment-date">
+        {props.date}
+      </div>
     </div>
   );
-  root.render(elem);
 }
 
+function Avatar(props){
+  return (
+    <img className="Avatar"
+          src={props.user.avatarUrl}
+          alt={props.user.name}
+        />
+  );
+};
 
-setInterval(tick, 1000);
+function UserInfo(props) {
+  return (
+    <div className="UserInfo">
+      <Avatar user={props.user}/>
+      <div className="UserInfo-name">
+        {props.user.name}
+      </div>
+    </div>
+  );
+}
 
+const comment = {
+  author: {
+    avatarUrl: 'http://qwert.by',
+    name: 'denis'
+  },
+  text : 'qweqweqwewqe',
+  data : new Date().toLocaleDateString()
+};
+
+
+
+root.render(<Comment author={comment.author} text={comment.text} date={comment.data} />);
